@@ -16,7 +16,7 @@ import FloatingIcons from './sections/FloatingIcons.jsx'
 import ScrollEffects from './components/ScrollEffects.jsx'
 import './site.css'
 
-function setMeta(name, content) {
+export function setMeta(name, content) {
   if (!content) return
   let el = document.head.querySelector(`meta[name="${name}"]`)
   if (!el) {

@@ -6,6 +6,10 @@ export function formatPhone(code, number) {
 }
 
 export function scrollToSection(id) {
+  if (window.location.pathname !== '/') {
+    window.location.assign(id ? `/#${id}` : '/')
+    return
+  }
   if (!id) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     history.replaceState(null, '', window.location.pathname)

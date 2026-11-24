@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../includes/bootstrap.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') json_out(['error' => 'Method not allowed'], 405);
 
 $_SERVER['REQUEST_METHOD'] = 'GET';
-$groups = ['brand', 'seo', 'cta', 'hero', 'ticker', 'products', 'farmgate', 'partner', 'process', 'markets', 'faq', 'quote', 'footer', 'floating', 'credits'];
+$groups = ['brand', 'seo', 'cta', 'hero', 'ticker', 'products', 'farmgate', 'partner', 'process', 'markets', 'faq', 'quote', 'footer', 'floating', 'credits', 'agripage'];
 $site = [];
 
 foreach ($groups as $g) {
