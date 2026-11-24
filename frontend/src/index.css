@@ -1,0 +1,33 @@
+:root {
+  --color-heading: #0a1f3c;
+  --color-subtext: #475569;
+  --color-accent: #22c55e;
+  --color-accent-dark: #16a34a;
+  --color-white: #ffffff;
+  --color-border: #e2e8f0;
+  --color-bg-soft: #f8fafc;
+  --color-error: #dc2626;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-subtext);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+  margin: 0;
+}

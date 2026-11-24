@@ -1,0 +1,2138 @@
+/* ===== Worilo public website ===== */
+.site {
+  --navy: #0a1f3c;
+  --navy-deep: #050b18;
+  --card-dark: #071426;
+  --line-dark: #17335f;
+  --green: #22c55e;
+  --btn-green: #15803d;
+  --btn-green-hover: #166534;
+  --gold: #d9a93a;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --nav-h: clamp(72px, 5vw, 92px);
+  --pad-x: clamp(24px, 5vw, 96px);
+
+  font-family: var(--font-body);
+  color: var(--color-subtext);
+  background: var(--color-white);
+  overflow-x: clip;
+}
+
+.site section {
+  scroll-margin-top: var(--nav-h);
+}
+
+.site h1,
+.site h2,
+.site h3,
+.site h4 {
+  font-family: var(--font-heading);
+  color: var(--navy);
+  margin: 0;
+}
+
+.site a {
+  color: inherit;
+}
+
+/* Wide layout like the Figma: content sits ~5% from each edge on large screens */
+.s-container {
+  width: min(1700px, 100% - 2 * var(--pad-x));
+  margin: 0 auto;
+}
+
+.s-section {
+  padding: 64px 0;
+}
+
+.s-center {
+  text-align: center;
+}
+
+.s-dark {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.s-title {
+  font-weight: 700;
+  font-size: clamp(32px, 3.9vw, 68px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.s-title-light {
+  color: var(--color-white) !important;
+}
+
+.s-lead {
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 760px;
+  margin: 18px auto 0;
+}
+
+.s-lead-light {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 18px 0 0;
+  max-width: 720px;
+}
+
+.s-eyebrow,
+.s-eyebrow-plain,
+.s-eyebrow-green {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.s-eyebrow {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.s-eyebrow-line {
+  width: 40px;
+  height: 2px;
+  background: var(--green);
+}
+
+.s-eyebrow-plain {
+  color: var(--green);
+}
+
+.s-eyebrow-green {
+  justify-content: center;
+  color: var(--btn-green);
+}
+
+/* ---------- Buttons ---------- */
+.s-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: clamp(50px, 3.2vw, 60px);
+  padding: 0 clamp(24px, 1.9vw, 36px);
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-size: clamp(15px, 0.98vw, 18px);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.s-btn svg {
+  transition: transform 0.2s;
+}
+
+.s-btn:hover svg {
+  transform: translateX(4px);
+}
+
+.s-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.s-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.s-btn-green {
+  background: var(--btn-green);
+  color: var(--color-white) !important;
+  box-shadow: 0 10px 24px rgba(21, 128, 61, 0.28);
+}
+
+.s-btn-green:hover:not(:disabled) {
+  background: var(--btn-green-hover);
+}
+
+.s-btn-navy {
+  background: var(--navy);
+  color: var(--color-white) !important;
+}
+
+.s-btn-navy:hover {
+  background: #14315c;
+}
+
+.s-btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.7);
+  color: var(--color-white) !important;
+}
+
+.s-btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.s-btn-outline-dark {
+  border-color: var(--navy);
+  color: var(--navy) !important;
+  background: transparent;
+}
+
+.s-btn-outline-dark:hover {
+  background: var(--navy);
+  color: var(--color-white) !important;
+}
+
+/* ---------- Scroll progress bar + back to top ---------- */
+.s-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 95;
+  height: 3px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.s-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--green), #86efac);
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+}
+
+.s-totop {
+  position: fixed;
+  left: 22px;
+  bottom: 24px;
+  z-index: 80;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--color-white);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s var(--ease), background 0.2s;
+}
+
+.s-totop.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.s-totop:hover {
+  background: var(--btn-green);
+}
+
+/* Staggered entrance for list items inside a revealed block */
+.s-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s var(--ease);
+  transition-delay: calc(var(--i, 0) * 80ms + 250ms);
+}
+
+.reveal.in .s-stagger > *,
+.reveal.in.s-stagger > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Images settle in as they scroll into view */
+.s-pcard-img img,
+.s-map img,
+.s-cat-img img {
+  transform: scale(1.1);
+  transition: transform 1.6s var(--ease);
+}
+
+.reveal.in .s-pcard-img img,
+.reveal.in .s-map img,
+.s-map.reveal.in img,
+.reveal.in .s-cat-img img {
+  transform: scale(1);
+}
+
+.reveal-zoom {
+  transform: scale(0.94);
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.75s ease, transform 0.75s var(--ease);
+}
+
+.reveal-up {
+  transform: translateY(34px);
+}
+
+.reveal-left {
+  transform: translateX(-52px);
+}
+
+.reveal-right {
+  transform: translateX(52px);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+.s-rise {
+  opacity: 0;
+  animation: s-rise 0.8s var(--ease) forwards;
+}
+
+@keyframes s-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Navbar ---------- */
+.s-nav {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow 0.25s;
+}
+
+.s-nav.scrolled {
+  box-shadow: 0 6px 24px rgba(10, 31, 60, 0.1);
+}
+
+.s-nav-inner {
+  width: calc(100% - clamp(32px, 4vw, 76px));
+  height: var(--nav-h);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.s-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.s-logo img {
+  height: clamp(44px, 3.1vw, 58px);
+  width: auto;
+}
+
+.s-logo strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 1.6vw, 30px);
+  line-height: 1.1;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+.s-logo small {
+  display: block;
+  margin-top: 2px;
+  font-size: clamp(11px, 0.82vw, 15.5px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.s-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: clamp(20px, 2vw, 38px);
+}
+
+.s-menu a:not(.s-btn) {
+  position: relative;
+  white-space: nowrap;
+  padding: 6px 0;
+  font-size: clamp(15px, 0.98vw, 18px);
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.s-menu a:not(.s-btn)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--btn-green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+
+.s-menu a:not(.s-btn):hover,
+.s-menu a.active {
+  color: var(--btn-green);
+}
+
+.s-menu a:not(.s-btn):hover::after,
+.s-menu a.active::after {
+  transform: scaleX(1);
+}
+
+.s-menu-cta,
+.s-burger {
+  display: none;
+}
+
+.s-burger {
+  margin-left: auto;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Hero ---------- */
+.s-hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  padding: 90px 0 60px;
+  background: var(--navy);
+  color: var(--color-white);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.s-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  inset: -60px 0 0 0; /* extra room so the parallax shift never shows an edge */
+  background: var(--hero-bg, none) center right / cover no-repeat;
+  filter: brightness(1.18) saturate(1.05); /* the photo is already dark: make the ship clearly visible */
+  translate: 0 var(--py, 0px);
+  animation: s-kenburns 26s ease-in-out infinite alternate;
+}
+
+/* Light wash only behind the text on the left; the right side stays clear */
+.s-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(4, 10, 22, 0.58) 0%, rgba(4, 10, 22, 0.3) 45%, rgba(4, 10, 22, 0) 78%);
+}
+
+@keyframes s-kenburns {
+  to {
+    transform: scale(1.06);
+  }
+}
+
+.s-hero-inner {
+  max-width: none;
+}
+
+.s-hero-title {
+  color: var(--color-white) !important;
+  font-weight: 700;
+  font-size: clamp(40px, 4.85vw, 90px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  max-width: 1000px;
+  margin: 0 0 28px !important;
+}
+
+.s-hero-sub {
+  margin: 0 0 22px;
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 1.45vw, 27px);
+  font-weight: 600;
+  color: var(--green);
+}
+
+.s-hero-desc {
+  max-width: 960px;
+  margin: 0 0 36px;
+  font-size: clamp(16px, 1.2vw, 22px);
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.s-hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.s-hero-highlights {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 40px;
+  margin: 56px 0 0;
+  padding: 26px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 1100px;
+}
+
+.s-hero-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.s-hero-highlights svg {
+  color: var(--green);
+}
+
+/* ---------- Ticker ---------- */
+.s-ticker {
+  overflow: hidden;
+  background: #3a4d68;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.s-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: s-marquee 30s linear infinite;
+}
+
+.s-ticker.pause:hover .s-ticker-track {
+  animation-play-state: paused;
+}
+
+.s-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.s-ticker-item i {
+  width: 6px;
+  height: 6px;
+  margin: 0 46px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+@keyframes s-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Products ---------- */
+.s-products .s-title {
+  margin-bottom: 8px;
+}
+
+.s-cat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.s-cat + .s-cat {
+  border-top: 1px solid var(--color-border);
+}
+
+.s-cat.flip .s-cat-media {
+  order: 2;
+}
+
+.s-cat-img {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 1.38;
+  background: #dfe7f1;
+  box-shadow: 0 24px 60px rgba(10, 31, 60, 0.16);
+}
+
+.s-cat-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+
+.s-cat:hover .s-cat-img img {
+  transform: scale(1.06);
+}
+
+.s-cat-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 26px;
+  background: var(--navy);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.s-cat-caption svg {
+  color: var(--green);
+}
+
+.s-cat-no {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--btn-green);
+}
+
+.s-cat-body h3 {
+  font-weight: 700;
+  font-size: clamp(30px, 3.8vw, 52px);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.s-cat-desc {
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0 0 26px;
+  max-width: 600px;
+}
+
+.s-checks {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 28px;
+  margin: 0 0 34px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.s-checks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  color: var(--navy);
+}
+
+.s-checks svg {
+  color: var(--btn-green);
+  flex-shrink: 0;
+}
+
+/* ---------- Farmgate ---------- */
+/* Figma: image card ~40% wide, vertically centred against the taller text column */
+.s-farm-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  gap: clamp(40px, 3.4vw, 68px);
+  align-items: center;
+}
+
+.s-farm-card {
+  background: var(--card-dark);
+  border: 1px solid var(--line-dark);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+.s-farm-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.35;
+  object-fit: cover;
+  transform: scale(1.12);
+  transition: transform 1.6s var(--ease);
+}
+
+.reveal.in .s-farm-card img {
+  transform: scale(1);
+}
+
+.s-farm-card:hover img {
+  transform: scale(1.05);
+}
+
+.s-farm-card p {
+  margin: 0;
+  padding: clamp(22px, 1.8vw, 32px) clamp(24px, 2vw, 36px);
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 1.45vw, 27px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-white);
+}
+
+.s-farm-sub {
+  margin: 22px 0 0;
+  font-family: var(--font-heading);
+  font-size: clamp(19px, 1.45vw, 27px);
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.s-farm-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 36px 0;
+}
+
+.s-farm-item {
+  background: var(--card-dark);
+  border: 1.5px solid var(--line-dark);
+  border-radius: 22px;
+  padding: 28px 26px;
+  transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s, opacity 0.75s ease;
+}
+
+.s-farm-item:hover {
+  border-color: var(--gold);
+  transform: translateY(-5px);
+  box-shadow: 0 0 0 1px rgba(217, 169, 58, 0.35), 0 20px 44px rgba(0, 0, 0, 0.4);
+}
+
+.s-farm-item span {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--green);
+}
+
+.s-farm-item h3 {
+  margin: 14px 0 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.s-farm-item p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.s-farm-foot {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.s-farm-foot p {
+  margin: 0;
+  flex: 1;
+  min-width: 240px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------- Sourcing partner ---------- */
+/* Light wash so the port photo stays clearly visible behind the cards (as in the Figma) */
+.s-partner {
+  position: relative;
+  padding-bottom: clamp(96px, 8vw, 150px);
+  background:
+    linear-gradient(rgba(240, 246, 255, 0.62), rgba(240, 246, 255, 0.68)),
+    var(--partner-bg, none) center / cover no-repeat,
+    #e8eff9;
+}
+
+/* Wavy edge that closes the section: a blue stripe, then white, then the dark section below */
+.s-partner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: clamp(50px, 5vw, 96px);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 96' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C 240 8 480 8 720 36 S 1200 70 1440 30 V96 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 96' preserveAspectRatio='none'%3E%3Cpath d='M0 22 C 260 -6 520 4 760 30 S 1220 58 1440 14 V96 H0Z' fill='%236f9bdc' fill-opacity='.75'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* This section uses narrower side margins in the Figma (~2.7% instead of ~5%) */
+.s-partner .s-container {
+  width: calc(100% - clamp(32px, 5.4vw, 104px));
+  max-width: none;
+}
+
+.s-partner .s-title {
+  font-size: clamp(30px, 3.3vw, 62px);
+}
+
+.s-partner .s-lead {
+  font-size: clamp(16px, 1.08vw, 21px);
+  max-width: 740px;
+  line-height: 1.65;
+}
+
+.s-partner-head {
+  margin-bottom: clamp(32px, 3vw, 54px);
+}
+
+/* Figma: two ~44%-wide cards per row with a wide gap between, rows almost touching,
+   and the text-only card centred in its own row. */
+.s-partner-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 44.5%));
+  justify-content: space-between;
+  gap: 0; /* Figma: the rows touch (card 3 starts 0.5px below cards 1 and 2) */
+}
+
+.s-pcard {
+  display: flex;
+  align-items: stretch;
+  /* Figma (1440px frame): height 204.34px, radius 64px, 3px solid #FFFFFF, background #FFFFFF.
+     Written in vw so it scales with the page: 14.19vw = 204.3px and 4.44vw = 64px at 1440px. */
+  min-height: clamp(190px, 14.19vw, 290px);
+}
+
+/* A card with a photo is built from two white pieces that meet at a straight seam:
+   the text block (round outer corners, radius 64px at 1440px) and the photo frame, whose
+   outline is the traced photo shape. So the card's outline follows the photo's sweep
+   exactly, with only a thin white band around the photo and no white patches. */
+.s-pcard:not(.solo) {
+  filter: drop-shadow(0 10px 22px rgba(10, 31, 60, 0.09));
+}
+
+.s-pcard:not(.solo) .s-pcard-text {
+  background: #ffffff;
+}
+
+.s-pcard.img-right .s-pcard-text {
+  border-radius: clamp(44px, 4.44vw, 88px) 0 0 clamp(44px, 4.44vw, 88px);
+}
+
+.s-pcard.img-left .s-pcard-text {
+  border-radius: 0 clamp(44px, 4.44vw, 88px) clamp(44px, 4.44vw, 88px) 0;
+}
+
+/* Photo frame: white shape; the photo inside is inset a few px and clipped to the same shape,
+   leaving the thin white border (3px) all the way around, like the Figma. */
+.s-pcard-img {
+  /* Figma: 3px solid white border, the same on every side (the seam next to the text has none) */
+  --t: 3px;
+  --r: 3px;
+  --b: 3px;
+  --l: 0px;
+  position: relative;
+  flex: 0 0 56%;
+  align-self: stretch;
+  background: #ffffff;
+}
+
+.s-pcard.img-left .s-pcard-img {
+  order: -1;
+  --r: 0px;
+  --l: 3px;
+}
+
+.s-pcard-photo {
+  position: absolute;
+  inset: var(--t) var(--r) var(--b) var(--l);
+  overflow: hidden;
+}
+
+/* Shape a: long sweep at the bottom outer corner (cards 1 and 2).
+   Shape b: the same outline flipped upside down (cards 4 and 5). */
+.s-pcard.shape-a.img-right .s-pcard-img,
+.s-pcard.shape-a.img-right .s-pcard-photo { clip-path: url(#pshape-a-r); }
+.s-pcard.shape-a.img-left .s-pcard-img,
+.s-pcard.shape-a.img-left .s-pcard-photo { clip-path: url(#pshape-a-l); }
+.s-pcard.shape-b.img-right .s-pcard-img,
+.s-pcard.shape-b.img-right .s-pcard-photo { clip-path: url(#pshape-b-r); }
+.s-pcard.shape-b.img-left .s-pcard-img,
+.s-pcard.shape-b.img-left .s-pcard-photo { clip-path: url(#pshape-b-l); }
+
+.s-pcard-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(8px, 0.9vw, 16px) clamp(6px, 0.5vw, 10px) clamp(8px, 0.9vw, 16px) clamp(20px, 2.4vw, 46px);
+}
+
+/* Photo on the left: the text starts right next to it (~22px) with more room on the right */
+.s-pcard.img-left .s-pcard-text {
+  padding-left: clamp(12px, 1.25vw, 24px);
+  padding-right: clamp(24px, 3.2vw, 62px);
+}
+
+/* The small chip is centred in the whole text column, while the title and text stay left-aligned */
+.s-pcard-icon {
+  align-self: center;
+  display: inline-grid;
+  place-items: center;
+  width: clamp(64px, 5.45vw, 104px);
+  height: clamp(22px, 1.6vw, 31px);
+  margin-bottom: clamp(6px, 0.55vw, 10px);
+  border-radius: 999px;
+  background: #e8edf5;
+  color: var(--navy);
+}
+
+.s-pcard h3 {
+  font-size: clamp(22px, 2.15vw, 41px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: clamp(6px, 0.55vw, 10px);
+}
+
+/* In the Figma, longer titles get smaller body text; a short one-line title gets larger text */
+.s-pcard p {
+  margin: 0;
+  font-size: clamp(12px, 0.88vw, 17px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.045em;
+}
+
+.s-pcard.roomy p {
+  font-size: clamp(13.5px, 1.07vw, 20.5px);
+  line-height: 1.45;
+}
+
+/* The photo fills its box without influencing the card's height */
+.s-pcard-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+
+.s-pcard:hover .s-pcard-photo img {
+  transform: scale(1.07);
+}
+
+/* Text-only card: frosted glass over the photo, with a very round outline */
+.s-pcard.solo {
+  grid-column: 1 / -1;
+  justify-self: center;
+  /* Figma (1440px frame): 351.37 x 234.82px, radius 106px, 3px solid #FFFFFF, background #FFFFFF94,
+     placed ~12px right of centre. In vw: 24.4vw x 16.31vw, radius 7.36vw. */
+  position: relative;
+  left: 0.82vw;
+  width: clamp(340px, 24.4vw, 470px);
+  min-height: clamp(220px, 16.31vw, 320px);
+  border-radius: clamp(74px, 7.36vw, 140px);
+  background: #ffffff94;
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  border: 3px solid #ffffff;
+  box-shadow: 0 10px 34px rgba(10, 31, 60, 0.06);
+}
+
+.s-pcard.solo .s-pcard-text {
+  padding: 30px clamp(10px, 0.9vw, 18px) 30px clamp(30px, 2.8vw, 54px);
+}
+
+.s-pcard.solo .s-pcard-icon {
+  background: transparent;
+  height: auto;
+}
+
+.s-pcard.solo p {
+  color: #666b73;
+  font-weight: 600;
+}
+
+/* ---------- How it works ---------- */
+.s-process {
+  background: #06122a;
+}
+
+.s-process-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.s-process-head > div {
+  flex: 1;
+  min-width: 280px;
+}
+
+.s-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.s-step {
+  background: #0b1f3d;
+  border: 1.5px solid var(--line-dark);
+  border-radius: 24px;
+  padding: 34px 36px;
+  transition: border-color 0.3s, transform 0.3s var(--ease), opacity 0.75s ease;
+}
+
+.s-step:hover {
+  border-color: var(--green);
+  transform: translateY(-4px);
+}
+
+.s-step span {
+  font-family: var(--font-heading);
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--green);
+}
+
+.s-step h3 {
+  margin: 22px 0 10px;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.s-step p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ---------- Global markets ---------- */
+.s-markets {
+  background: #050d1c;
+}
+
+.s-markets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.s-chips {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 38px 0;
+  padding: 0;
+}
+
+.s-chips li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 14px 18px;
+  background: #0a1a33;
+  border: 1px solid var(--line-dark);
+  border-radius: 16px;
+  color: var(--color-white);
+  font-size: 17px;
+  line-height: 1.25;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s var(--ease), opacity 0.75s ease;
+}
+
+.s-chips li:hover {
+  border-color: var(--green);
+  background: #0d2142;
+  transform: translateY(-3px);
+}
+
+.s-chips svg {
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.s-map {
+  border: 1px solid var(--line-dark);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.s-map img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.5;
+  object-fit: cover;
+}
+
+/* ---------- FAQ ---------- */
+.s-faq {
+  background: linear-gradient(180deg, #c8d6ee 0%, #d6e1f2 100%);
+}
+
+.s-faq-wrap .s-title {
+  margin-top: 4px;
+}
+
+.s-faq-list {
+  max-width: 940px;
+  margin: 36px auto 0;
+}
+
+.s-faq-item {
+  background: var(--color-white);
+  border-radius: 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(10, 31, 60, 0.06);
+}
+
+.s-faq-item > button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 32px;
+  background: transparent;
+  border: 0;
+  border-radius: 22px;
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--navy);
+  text-align: left;
+  cursor: pointer;
+}
+
+.s-faq-item > button svg {
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease);
+}
+
+.s-faq-item.open > button svg {
+  transform: rotate(180deg);
+}
+
+.s-faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--ease);
+}
+
+.s-faq-item.open .s-faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.s-faq-answer > div {
+  overflow: hidden;
+}
+
+.s-faq-answer p {
+  margin: 0 32px;
+  padding: 22px 0 30px;
+  border-top: 1px solid var(--color-border);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* ---------- Quote form ---------- */
+.s-quote {
+  background: #f1f4f9;
+}
+
+.s-quote-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.s-quote-left .s-eyebrow-green {
+  justify-content: flex-start;
+}
+
+.s-quote-left .s-lead {
+  margin-left: 0;
+}
+
+.s-contact-cards {
+  display: grid;
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.s-ccard {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 26px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s, opacity 0.75s ease;
+}
+
+.s-ccard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(10, 31, 60, 0.1);
+}
+
+.s-ccard-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f5ec;
+  color: var(--btn-green);
+}
+
+.s-ccard-icon.green {
+  background: var(--btn-green);
+  color: var(--color-white);
+}
+
+.s-ccard small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.s-ccard a,
+.s-ccard strong {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.s-ccard-dark {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.s-ccard-dark small {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.s-ccard-dark strong {
+  color: var(--color-white);
+}
+
+.s-form-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+  padding: 44px;
+  box-shadow: 0 30px 70px rgba(10, 31, 60, 0.1);
+}
+
+.s-form-card h3 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.s-form-sub {
+  margin: 8px 0 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 17px;
+}
+
+.s-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 22px;
+}
+
+.s-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.s-field.wide {
+  grid-column: 1 / -1;
+}
+
+.s-field label {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.s-field input,
+.s-field select,
+.s-field textarea {
+  width: 100%;
+  height: 54px;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--navy);
+  background: var(--color-white);
+  border: 1.5px solid #d6deea;
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.s-field textarea {
+  height: auto;
+  min-height: 120px;
+  padding: 14px 18px;
+  resize: vertical;
+}
+
+.s-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  padding-right: 46px;
+  cursor: pointer;
+}
+
+.s-field input::placeholder,
+.s-field textarea::placeholder {
+  color: #94a3b8;
+}
+
+.s-field input:focus,
+.s-field select:focus,
+.s-field textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.16);
+}
+
+.s-field.err input,
+.s-field.err select {
+  border-color: var(--color-error);
+}
+
+.s-field-err {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-error);
+}
+
+.s-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.s-submit {
+  margin-top: 28px;
+}
+
+.s-disclaimer {
+  margin: 18px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.s-form-error {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--color-error);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.s-form-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 12px;
+}
+
+.s-form-done p {
+  max-width: 420px;
+  margin: 12px 0 26px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.s-done-icon {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: #e8f5ec;
+  color: var(--btn-green);
+  animation: s-pop 0.5s var(--ease);
+}
+
+@keyframes s-pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- Footer ---------- */
+.s-footer {
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.78);
+  padding-top: 56px;
+}
+
+.s-footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 0.9fr 1fr 1.3fr;
+  gap: 48px;
+  padding-bottom: 44px;
+}
+
+.s-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.s-footer-logo-tile {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border-radius: 12px;
+  background: var(--color-white);
+}
+
+.s-footer-logo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.s-footer-logo strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  color: var(--color-white);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.s-footer-logo small {
+  display: block;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.s-footer-brand p {
+  margin: 0 0 26px;
+  max-width: 460px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.s-footer-col h4 {
+  margin-bottom: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.s-footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.s-footer-col a {
+  font-size: 16px;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.s-footer-col a:hover {
+  color: var(--green);
+  padding-left: 4px;
+}
+
+.s-footer-col .muted {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+}
+
+.s-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 28px 0;
+  border-top: 1px solid #14233f;
+  font-size: 15px;
+}
+
+.s-footer-credit {
+  padding: 18px 0 28px;
+  border-top: 1px dashed #14233f;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.s-footer-credit a,
+.s-footer-credit strong {
+  color: var(--green);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.s-footer-credit a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Floating icons ---------- */
+.s-floating {
+  position: fixed;
+  bottom: 24px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.s-floating.right {
+  right: 22px;
+}
+
+.s-floating.left {
+  left: 22px;
+}
+
+.s-float {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-white);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+
+.s-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+}
+
+.s-float.whatsapp {
+  background: #25d366;
+}
+
+.s-float.phone {
+  background: #1d7fd4;
+}
+
+.s-float.mail {
+  background: var(--color-white);
+  color: #1d7fd4;
+  border: 1px solid var(--color-border);
+}
+
+.s-float.whatsapp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  animation: s-ping 2.4s ease-out infinite;
+}
+
+@keyframes s-ping {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+/* ---------- Loading / error ---------- */
+.s-state {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+.s-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid #dbe3ee;
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: s-spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes s-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Hover effects (mouse devices only) ----------
+   Every kind of element gets its own motion so the page feels alive without repeating itself:
+   images zoom, cards lift or glow, icons spin / bounce / pop, buttons shine, links slide. */
+@keyframes s-bounce {
+  0%, 100% { transform: translateY(0); }
+  35% { transform: translateY(-9px); }
+  65% { transform: translateY(2px); }
+}
+
+@keyframes s-wiggle {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: -14deg; }
+  75% { rotate: 14deg; }
+}
+
+@media (hover: hover) {
+  /* Images: zoom in (higher specificity than the scroll "settle" effect) */
+  .reveal.in .s-farm-card:hover img {
+    transform: scale(1.07);
+    transition-duration: 0.9s;
+  }
+  .s-map.reveal.in:hover img {
+    transform: scale(1.07);
+    transition-duration: 0.9s;
+  }
+  .s-cat:hover .s-cat-img img,
+  .s-pcard:hover .s-pcard-photo img {
+    transition-duration: 0.9s;
+  }
+
+  /* Logo: a small tilt */
+  .s-logo img {
+    transition: transform 0.4s var(--ease);
+  }
+  .s-logo:hover img {
+    transform: rotate(-8deg) scale(1.08);
+  }
+
+  /* Green buttons: a light shine sweeps across */
+  .s-btn-green {
+    position: relative;
+    overflow: hidden;
+  }
+  .s-btn-green::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+  }
+  .s-btn-green:hover::after {
+    left: 130%;
+  }
+  .s-btn-outline-light:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  /* Hero highlights: icon pops */
+  .s-hero-highlights li svg {
+    transition: transform 0.35s var(--ease);
+  }
+  .s-hero-highlights li:hover svg {
+    transform: scale(1.35) rotate(10deg);
+  }
+
+  /* Ticker words light up */
+  .s-ticker-item {
+    transition: color 0.2s;
+  }
+  .s-ticker-item:hover {
+    color: var(--green);
+  }
+
+  /* Products: caption icon tilts, checklist items slide */
+  .s-cat-caption svg {
+    transition: transform 0.4s var(--ease);
+  }
+  .s-cat:hover .s-cat-caption svg {
+    transform: rotate(-14deg) scale(1.25);
+  }
+  .reveal.in .s-checks li:hover {
+    transform: translateX(8px);
+    transition-delay: 0s;
+  }
+  .s-checks li svg {
+    transition: transform 0.35s var(--ease);
+  }
+  .s-checks li:hover svg {
+    transform: scale(1.2) rotate(-8deg);
+  }
+
+  /* Farmgate cards: number spreads out, title turns gold (the border is already gold) */
+  .s-farm-item span,
+  .s-farm-item h3 {
+    transition: letter-spacing 0.4s var(--ease), color 0.3s;
+  }
+  .s-farm-item:hover span {
+    letter-spacing: 0.32em;
+  }
+  .s-farm-item:hover h3 {
+    color: var(--gold);
+  }
+
+  /* Partner cards: the whole card lifts, the icon chip pops */
+  .s-pcard.reveal.in:not(.solo):hover {
+    transform: translateY(-7px);
+    filter: drop-shadow(0 18px 28px rgba(10, 31, 60, 0.18));
+  }
+  .s-pcard.solo.reveal.in:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 22px 40px rgba(10, 31, 60, 0.14);
+  }
+  .s-pcard-icon {
+    transition: transform 0.4s var(--ease), background 0.3s;
+  }
+  .s-pcard:hover .s-pcard-icon {
+    transform: scale(1.14) rotate(-6deg);
+    background: #d9e6f6;
+  }
+
+  /* How it works: a green bar grows down the left edge, the number slides */
+  .s-step {
+    position: relative;
+    overflow: hidden;
+  }
+  .s-step::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--green);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s var(--ease);
+  }
+  .s-step:hover::before {
+    transform: scaleY(1);
+  }
+  .s-step span {
+    display: inline-block;
+    transition: transform 0.4s var(--ease);
+  }
+  .s-step:hover span {
+    transform: translateX(8px) scale(1.08);
+  }
+
+  /* Global markets: the globe icon spins a full turn */
+  .s-chips li svg {
+    transition: transform 0.7s var(--ease);
+  }
+  .s-chips li:hover svg {
+    transform: rotate(360deg);
+  }
+
+  /* FAQ: the card slides right and the question turns green */
+  .s-faq-item.reveal.in:hover {
+    transform: translateX(8px);
+    box-shadow: 0 16px 36px rgba(10, 31, 60, 0.15);
+  }
+  .s-faq-item > button {
+    transition: color 0.25s;
+  }
+  .s-faq-item:hover > button {
+    color: var(--btn-green);
+  }
+
+  /* Contact cards: the icon bounces */
+  .s-ccard:hover .s-ccard-icon {
+    animation: s-bounce 0.6s ease;
+  }
+  .s-field input:hover,
+  .s-field select:hover,
+  .s-field textarea:hover {
+    border-color: #aebfd6;
+  }
+
+  /* Footer: logo tile tilts */
+  .s-footer-logo-tile {
+    transition: transform 0.4s var(--ease);
+  }
+  .s-footer-logo:hover .s-footer-logo-tile {
+    transform: rotate(-8deg) scale(1.08);
+  }
+
+  /* Floating icons wiggle, back-to-top arrow lifts */
+  .s-float:hover svg {
+    animation: s-wiggle 0.5s ease;
+  }
+  .s-totop svg {
+    transition: transform 0.3s var(--ease);
+  }
+  .s-totop:hover svg {
+    transform: translateY(-4px);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .site *,
+  .site *::before,
+  .site *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
+  .s-section {
+    padding: 52px 0;
+  }
+  .s-nav-inner {
+    gap: 16px;
+  }
+  .s-nav-cta {
+    display: none;
+  }
+  .s-burger {
+    display: inline-flex;
+  }
+  .s-menu {
+    position: fixed;
+    inset: var(--nav-h) 0 0 0;
+    z-index: 60;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 24px;
+    background: var(--color-white);
+    transform: translateX(100%);
+    transition: transform 0.3s var(--ease);
+    overflow-y: auto;
+  }
+  .s-menu.open {
+    transform: none;
+  }
+  .s-menu a:not(.s-btn) {
+    padding: 16px 4px;
+    font-size: 20px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .s-menu a:not(.s-btn)::after {
+    display: none;
+  }
+  .s-menu-cta {
+    display: inline-flex;
+    margin-top: 22px;
+  }
+  .s-cat,
+  .s-farm-grid,
+  .s-markets-grid,
+  .s-quote-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .s-cat.flip .s-cat-media {
+    order: 0;
+  }
+  .s-partner-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .s-pcard.solo {
+    width: min(560px, 100%);
+  }
+  .s-farm-grid {
+    align-items: start;
+  }
+  .s-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px 32px;
+  }
+  .s-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .site {
+    --pad-x: 16px;
+  }
+  .s-nav-inner {
+    width: calc(100% - 32px);
+  }
+  .s-logo img {
+    height: 42px;
+  }
+  .s-logo strong {
+    font-size: 20px;
+  }
+  .s-logo small {
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+  }
+  .s-section {
+    padding: 44px 0;
+  }
+  .s-hero {
+    padding: 64px 0 44px;
+  }
+  .s-hero-highlights {
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 40px;
+  }
+  .s-btn {
+    height: 50px;
+    padding: 0 24px;
+    font-size: 15px;
+  }
+  .s-hero-btns .s-btn {
+    flex: 1 1 100%;
+  }
+  .s-ticker {
+    padding: 14px 0;
+  }
+  .s-ticker-item {
+    font-size: 13px;
+  }
+  .s-ticker-item i {
+    margin: 0 28px;
+  }
+  .s-cat {
+    padding: 28px 0;
+    gap: 24px;
+  }
+  .s-checks {
+    grid-template-columns: 1fr;
+  }
+  .s-farm-cards,
+  .s-steps {
+    grid-template-columns: 1fr;
+  }
+  .s-farm-foot .s-btn {
+    width: 100%;
+  }
+  .s-partner-grid {
+    grid-template-columns: 1fr;
+  }
+  .s-pcard,
+  .s-pcard.solo {
+    flex-direction: column;
+    width: 100%;
+    border-radius: 32px;
+    min-height: 0;
+    text-align: left;
+  }
+  .s-pcard:not(.solo) {
+    background: #ffffff;
+    overflow: hidden;
+    filter: none;
+    box-shadow: 0 10px 28px rgba(10, 31, 60, 0.1);
+  }
+  .s-pcard:not(.solo) .s-pcard-text,
+  .s-pcard.img-right .s-pcard-text,
+  .s-pcard.img-left .s-pcard-text {
+    border-radius: 0;
+  }
+  .s-pcard .s-pcard-img,
+  .s-pcard.img-left .s-pcard-img,
+  .s-pcard.img-right .s-pcard-img {
+    order: -1;
+    flex: none;
+    align-self: stretch;
+    height: 210px;
+    background: transparent;
+    clip-path: none !important;
+  }
+  .s-pcard-photo {
+    inset: 0 !important;
+    clip-path: none !important;
+  }
+  .s-pcard.solo {
+    left: 0;
+    background: rgba(255, 255, 255, 0.85);
+  }
+  .s-pcard-text,
+  .s-pcard.solo .s-pcard-text {
+    align-items: flex-start;
+    padding: 28px 26px 32px;
+  }
+  .s-pcard-icon {
+    align-self: flex-start;
+  }
+  .s-step {
+    padding: 26px 24px;
+  }
+  .s-process-head .s-btn {
+    width: 100%;
+  }
+  .s-chips {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .s-chips li {
+    min-height: 64px;
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+  .s-faq-item > button {
+    padding: 20px 20px;
+  }
+  .s-faq-answer p {
+    margin: 0 20px;
+    font-size: 16px;
+  }
+  .s-form-card {
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+  .s-form-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .s-submit {
+    width: 100%;
+  }
+  .s-ccard {
+    padding: 18px;
+    gap: 14px;
+  }
+  .s-ccard a,
+  .s-ccard strong {
+    font-size: 18px;
+  }
+  .s-footer {
+    padding-top: 56px;
+  }
+  .s-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .s-footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .s-float {
+    width: 52px;
+    height: 52px;
+  }
+  .s-floating {
+    bottom: 16px;
+    gap: 12px;
+  }
+  .s-floating.right {
+    right: 14px;
+  }
+  .s-floating.left {
+    left: 14px;
+  }
+}
+
+/* Accessible description of a CSS background photo (crawlers + screen readers); not visible. */
+.s-bg-alt {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
