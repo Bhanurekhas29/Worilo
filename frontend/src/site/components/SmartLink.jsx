@@ -5,7 +5,13 @@ export function formatPhone(code, number) {
   return `+${code} ${String(number).replace(/(\d{5})(?=\d)/g, '$1 ')}`
 }
 
+export const AGRI_POPUP_ID = 'agri-popup'
+
 export function scrollToSection(id) {
+  if (id === AGRI_POPUP_ID) {
+    window.dispatchEvent(new Event('open-agri-popup'))
+    return
+  }
   if (window.location.pathname !== '/') {
     window.location.assign(id ? `/#${id}` : '/')
     return

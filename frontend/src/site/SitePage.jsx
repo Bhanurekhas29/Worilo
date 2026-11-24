@@ -13,10 +13,11 @@ import Faq from './sections/Faq.jsx'
 import Quote from './sections/Quote.jsx'
 import Footer from './sections/Footer.jsx'
 import FloatingIcons from './sections/FloatingIcons.jsx'
+import AgriModal from './sections/AgriModal.jsx'
 import ScrollEffects from './components/ScrollEffects.jsx'
 import './site.css'
 
-export function setMeta(name, content) {
+function setMeta(name, content) {
   if (!content) return
   let el = document.head.querySelector(`meta[name="${name}"]`)
   if (!el) {
@@ -79,6 +80,7 @@ export default function SitePage() {
       </main>
       <Footer site={site} />
       <FloatingIcons data={site.floating} />
+      <AgriModal data={site.agripage} waMessage={site.floating?.whatsapp?.message} />
       <ScrollEffects />
     </div>
   )

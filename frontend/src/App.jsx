@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import SitePage from './site/SitePage.jsx'
-import AgriProductsPage from './site/AgriProductsPage.jsx'
 import AdminLayout from './admin/layouts/AdminLayout.jsx'
 import Login from './admin/pages/Login.jsx'
 import Dashboard from './admin/pages/Dashboard.jsx'
@@ -29,7 +28,6 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<SitePage />} />
-      <Route path="/agricultural-products" element={<AgriProductsPage />} />
       <Route path="/admin/login" element={<Login />} />
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />

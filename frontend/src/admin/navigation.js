@@ -16,7 +16,7 @@ export const navItems = [
   { to: '/admin/hero', label: 'Hero Section', icon: 'hero' },
   { to: '/admin/ticker', label: 'Scrolling Ticker', icon: 'ticker' },
   { to: '/admin/products', label: 'Our Products', icon: 'products' },
-  { to: '/admin/agri-page', label: 'Agricultural Page', icon: 'products' },
+  { to: '/admin/agri-page', label: 'Agricultural Popup', icon: 'products' },
   { to: '/admin/farmgate', label: 'Farmgate Sourcing', icon: 'sprout' },
   { to: '/admin/partner', label: 'Sourcing Partner', icon: 'handshake' },
   { to: '/admin/how-it-works', label: 'How It Works', icon: 'steps' },

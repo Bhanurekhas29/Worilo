@@ -19,8 +19,6 @@ function validate(v) {
       if (required) e[key] = `${label} is required`
     } else if (n < min || n > max) e[key] = `${label} must be ${min}-${max} characters`
   }
-  range('seo_title', 'Page title', 10, 70)
-  range('seo_description', 'Page description', 50, 160)
   range('eyebrow', 'Eyebrow text', 2, 40, false)
   range('heading', 'Heading', 5, 100)
   range('intro', 'Intro text', 20, 300, false)
@@ -44,8 +42,6 @@ function validate(v) {
 
 export default function AgriPage() {
   const form = useSettingsForm('/settings/agripage', {
-    seo_title: '',
-    seo_description: '',
     eyebrow: '',
     heading: '',
     intro: '',
@@ -68,17 +64,12 @@ export default function AgriPage() {
 
   return (
     <SettingsPage
-      title="Agricultural Page"
-      subtitle="The page opened by “Explore Agricultural Products” (/agricultural-products): banner and category cards."
+      title="Agricultural Popup"
+      subtitle="The popup opened by “Explore Agricultural Products”: banner and category cards. To open it from any button, set that button’s link to #agri-popup."
       form={form}
       validate={validate}
     >
-      <FormSection icon="search" title="Search engine details" description="Title and description shown in Google results for this page.">
-        <Field label="Page title" required maxLength={70} counter={70} hint="Browser tab title and search result title." {...form.bind('seo_title')} />
-        <Field label="Page description" required as="textarea" rows={3} counter={160} {...form.bind('seo_description')} />
-      </FormSection>
-
-      <FormSection icon="text" title="Banner" description="Photo and heading at the top of the page." tone="blue">
+      <FormSection icon="text" title="Banner" description="Photo and heading at the top of the popup." tone="blue">
         <Field label="Eyebrow text" maxLength={40} hint="Small green line above the heading. Optional." {...form.bind('eyebrow')} />
         <Field label="Heading" required maxLength={100} {...form.bind('heading')} />
         <Field label="Intro text" as="textarea" rows={3} counter={300} hint="Optional line under the heading." {...form.bind('intro')} />
@@ -158,8 +149,8 @@ export default function AgriPage() {
             />
             <Field
               label="Card link"
-              placeholder="/#contact"
-              hint="Where the arrow goes: a page like /rice, a section like /#contact, or a full URL. Leave empty for no link."
+              placeholder="#contact"
+              hint="Where the arrow goes: a section like #contact, a page like /rice, or a full URL. Leave empty for no link."
               value={c.url || ''}
               error={errors[`cards.${i}.url`]}
               onChange={(e) => patch(i, { url: e.target.value })}
@@ -170,7 +161,7 @@ export default function AgriPage() {
           type="button"
           className="btn btn-outline btn-sm"
           disabled={cards.length >= MAX_CARDS}
-          onClick={() => setCards([...cards, { title: '', icon: 'wheat', image: '', image_alt: '', url: '/#contact' }])}
+          onClick={() => setCards([...cards, { title: '', icon: 'wheat', image: '', image_alt: '', url: '#contact' }])}
         >
           <Icon name="plus" size={16} /> Add card
         </button>

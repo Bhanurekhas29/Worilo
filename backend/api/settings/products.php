@@ -23,7 +23,7 @@ function products_defaults(): array {
                 'image_alt' => 'Sacks of rice and baskets of mung beans, onions, tomatoes, grapes and spices on a wooden table with farmers working in a field behind',
                 'items' => ['Vegetables & Fruits', 'Seeds & Spices', 'Grains & Pulses', 'Other Agri Products', 'Farmgate Prices', 'Premium Quality'],
                 'button_label' => 'Explore Agricultural Products',
-                'button_url' => '/agricultural-products',
+                'button_url' => '#agri-popup',
                 'is_active' => true,
             ],
             [

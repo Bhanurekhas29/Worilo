@@ -2137,20 +2137,81 @@
   pointer-events: none;
 }
 
-/* ---------- Agricultural Products page (/agricultural-products) ---------- */
-.s-agri-banner {
+/* ---------- Agricultural Products popup ---------- */
+.s-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: start center;
+  padding: clamp(12px, 3vw, 40px);
+  overflow-y: auto;
+  background: rgba(5, 11, 24, 0.66);
+  backdrop-filter: blur(3px);
+  animation: s-modal-fade 0.25s ease both;
+}
+
+.s-modal-panel {
+  position: relative;
+  width: min(1060px, 100%);
+  margin: auto;
+  padding: 0 0 clamp(18px, 2.4vw, 32px);
+  border-radius: 20px;
+  background: var(--color-white);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  animation: s-modal-pop 0.35s var(--ease) both;
+}
+
+@keyframes s-modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes s-modal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+}
+
+.s-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--navy);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s var(--ease), background 0.25s;
+}
+
+.s-modal-close:hover {
+  transform: rotate(90deg);
+  background: var(--color-white);
+}
+
+.s-modal-banner {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: clamp(340px, 34vw, 480px);
-  padding: clamp(110px, 10vw, 150px) 0 clamp(40px, 4vw, 64px);
+  min-height: clamp(200px, 24vw, 280px);
+  padding: clamp(20px, 3vw, 36px);
+  margin-bottom: clamp(16px, 2vw, 28px);
   background: var(--navy);
   color: var(--color-white);
-  overflow: hidden;
   isolation: isolate;
 }
 
-.s-agri-banner::before {
+.s-modal-banner::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -2158,39 +2219,46 @@
   background: var(--agri-bg, none) center / cover no-repeat;
 }
 
-.s-agri-banner::after {
+.s-modal-banner::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(4, 10, 22, 0.35) 0%, rgba(4, 10, 22, 0.72) 100%);
+  background: linear-gradient(180deg, rgba(4, 10, 22, 0.1) 0%, rgba(4, 10, 22, 0.78) 100%);
 }
 
-.s-agri-banner-inner {
+.s-modal-banner-text {
   display: grid;
-  gap: 14px;
+  gap: 6px;
+  max-width: 62ch;
 }
 
-.s-agri-banner .s-hero-title {
-  font-size: clamp(2rem, 3.6vw, 3.4rem);
-  max-width: 18ch;
+.s-modal-eyebrow {
   margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7be0a0;
 }
 
-.s-agri-banner .s-hero-desc {
-  max-width: 60ch;
+.s-modal-banner h2 {
   margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1.15;
+  color: var(--color-white);
 }
 
-.s-agri {
-  padding: clamp(36px, 4vw, 64px) 0 clamp(56px, 6vw, 96px);
-  background: var(--color-white);
+.s-modal-banner p:not(.s-modal-eyebrow) {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.92;
 }
 
 .s-agri-grid {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 clamp(16px, 2.4vw, 32px);
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: clamp(12px, 1.4vw, 20px);

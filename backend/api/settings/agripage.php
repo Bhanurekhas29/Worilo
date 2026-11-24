@@ -1,19 +1,17 @@
 <?php
-// "Agricultural Products" page (/agricultural-products): banner, intro and a grid of category cards. GET | PUT
+// "Agricultural Products" popup (opened by the #agri-popup link): banner, intro and a grid of category cards. GET | PUT
 // Card links are admin-controlled (page path, #anchor or full URL).
 require_once __DIR__ . '/../../includes/bootstrap.php';
 require_once __DIR__ . '/../../includes/settings.php';
 
 require_admin();
-$fields = ['seo_title', 'seo_description', 'eyebrow', 'heading', 'intro', 'banner_image', 'banner_alt', 'cards'];
+$fields = ['eyebrow', 'heading', 'intro', 'banner_image', 'banner_alt', 'cards'];
 const MAX_AGRI_CARDS = 16;
 const AGRI_ICONS = ['wheat', 'sprout', 'bean', 'leaf', 'flame', 'droplet', 'apple', 'flask', 'nut', 'package'];
 
 function agripage_defaults(): array {
-    $card = fn($title, $icon, $image, $alt) => ['title' => $title, 'icon' => $icon, 'image' => $image, 'image_alt' => $alt, 'url' => '/#contact'];
+    $card = fn($title, $icon, $image, $alt) => ['title' => $title, 'icon' => $icon, 'image' => $image, 'image_alt' => $alt, 'url' => '#contact'];
     return [
-        'seo_title' => 'Agricultural Products from India | Rice, Spices, Pulses | WORILO',
-        'seo_description' => 'Source rice, grains, pulses, seeds, spices, oils, fruits and vegetables directly from Indian farmers and suppliers with WORILO, your India sourcing agent.',
         'eyebrow' => 'Agricultural Products',
         'heading' => 'Agricultural Products from India',
         'intro' => 'We source a wide range of agricultural products from India directly from farmers and producers, at competitive farmgate prices.',
@@ -45,8 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $errors = [];
 
     $clean = [
-        'seo_title' => v_text($in, 'seo_title', 'Page title', 10, 70, $errors),
-        'seo_description' => v_text($in, 'seo_description', 'Page description', 50, 160, $errors),
         'eyebrow' => v_text($in, 'eyebrow', 'Eyebrow text', 2, 40, $errors, false),
         'heading' => v_text($in, 'heading', 'Heading', 5, 100, $errors),
         'intro' => v_text($in, 'intro', 'Intro text', 20, 300, $errors, false),
