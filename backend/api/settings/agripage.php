@@ -15,8 +15,8 @@ function agripage_defaults(): array {
         'eyebrow' => 'Agricultural Products',
         'heading' => 'Agricultural Products from India',
         'intro' => 'We source a wide range of agricultural products from India directly from farmers and producers, at competitive farmgate prices.',
-        'banner_image' => '/images/agricultural-harvest.webp',
-        'banner_alt' => 'Burlap sacks of grains, pulses and seeds with wheat ears, cotton and fresh vegetables in front of a green field',
+        'banner_image' => '/images/agricultural-popup-banner.webp',
+        'banner_alt' => 'Burlap sack and wooden bowl of white rice with golden rice ears in front of a green paddy field',
         'cards' => [
             $card('Rice', 'wheat', '/images/rice.webp', 'Sack and heap of white rice grains with green rice plants'),
             $card('Grains & Cereals', 'sprout', '/images/grains-cereals.webp', 'Wooden bowls of assorted grains and cereals in burlap sacks'),

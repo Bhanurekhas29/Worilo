@@ -76,7 +76,7 @@ export default function AgriPage() {
         <Field
           label="Banner image"
           icon="image"
-          placeholder="/images/agricultural-harvest.webp"
+          placeholder="/images/agricultural-popup-banner.webp"
           hint="Put the file in frontend/public/images and enter its path."
           {...form.bind('banner_image')}
         />
