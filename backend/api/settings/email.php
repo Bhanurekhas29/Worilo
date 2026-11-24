@@ -22,10 +22,10 @@ function email_settings_out(array $d): array {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $d = settings_get('email', $fields);
-    // Nothing saved yet: pre-fill a Gmail setup for testing. Only the app password is still needed.
+    // Nothing saved yet: pre-fill the company Gmail setup. Only the app password is still needed.
     if ($d['smtp_host'] === '' && $d['smtp_username'] === '' && $d['notify_email'] === '') {
         $d['smtp_host'] = 'smtp.gmail.com';
-        $d['smtp_username'] = $d['from_email'] = $d['notify_email'] = 'sbrekha92@gmail.com';
+        $d['smtp_username'] = $d['from_email'] = $d['notify_email'] = 'worilobusiness@gmail.com';
         $d['from_name'] = 'WORILO';
     }
     if ($d['encryption'] === '') $d['encryption'] = 'tls';
